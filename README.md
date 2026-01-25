@@ -1,3 +1,3 @@
-# Arch-couple config
+# October Linux configuration
 
-This is the official repository for the default configuration for Arch-Couple.
+This is the official repository for the default configuration for October Linux.
