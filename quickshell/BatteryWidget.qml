@@ -7,13 +7,17 @@ Rectangle {
     color: theme.backgroundColor
 
     function getPercentage() {
-        if (UPower.devices.values[0].isLaptopBattery) {
+        if (UPower.displayDevice.isLaptopBattery) {
             return (UPower.devices.values[0].percentage * 100).toFixed()
         }
     }
 
     function getIcon() {
         var percentage = batteryWidget.getPercentage()
+        if (!UPower.displayDevice.isLaptopBattery) {
+            return ""
+        }
+
         if (!UPower.onBattery) {
             return "󰂄"
         }
@@ -45,8 +49,7 @@ Rectangle {
         }
     }
 
-    visible: batteryWidget.getPercentage() != 0.0
-    width: batteryWidget.getPercentage() != 0.0
+    visible: UPower.displayDevice.isLaptopBattery
 
     Text {
         id: icon
