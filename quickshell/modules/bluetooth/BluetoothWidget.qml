@@ -5,12 +5,11 @@ import QtQuick
 Rectangle {
     id: bluetoothWidget
     width: parent.width
-    height: bluetoothWidget.hasBluetoothAdapter() ? icon.height : 0
+    height: 20
+    visible: Bluetooth.defaultAdapter != undefined
     color: "transparent"
 
-    function hasBluetoothAdapter() {
-        return Bluetooth.defaultAdapter != null
-    }
+    signal togglePopup()
 
     function hasConnectedDevices() {
         var model = Bluetooth.defaultAdapter
@@ -25,10 +24,6 @@ Rectangle {
     }
 
     function getIcon() {
-        if (!bluetoothWidget.hasBluetoothAdapter()) {
-            return ""
-        }
-
         var disabled = 4
         var enabled = 1
         var enabling = 2
@@ -47,7 +42,6 @@ Rectangle {
             case disabling: return "󰂳"
             default: return ""
         }
-
     }
 
     Text {
@@ -56,5 +50,10 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         font: theme.ubuntuMonoNerdFont
         color: theme.foregroundColor
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        onClicked: bluetoothWidget.togglePopup()
     }
 }
