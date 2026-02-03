@@ -1,6 +1,7 @@
 import Quickshell
 import Quickshell.Io
 import QtQuick
+import QtQuick.Layouts
 
 Variants {
     model: Quickshell.screens
@@ -14,18 +15,20 @@ Variants {
                     family: "Ubuntu Mono Nerd Font Propo",
                     pointSize: 12
                 })
-                readonly property string backgroundColor: "#18181a"
-                readonly property string foregroundColor: "#ffffff"
+                readonly property color backgroundColor: Qt.rgba(0.09, 0.09, 0.10, 1.0)
+                readonly property color foregroundColor: "#ffffff"
+                readonly property int widgetsSpacing: 10
+                readonly property int workspacesSpacing: 5
+                readonly property color activeWorkspace: "#ff99ff"
+                readonly property color inactiveWorkspace: "#ffffff"
             }
 
             QtObject {
-                id: helloo
+                id: bar
                 readonly property ShellScreen screen: modelData
             }
 
             color: theme.backgroundColor
-
-
 
             screen: modelData
 
@@ -37,70 +40,74 @@ Variants {
 
             implicitWidth: 30
 
-            Column {
-                id: topcol
+            Rectangle {
+                id: top
+
+                height: topcol.height
+                width: topcol.width
                 anchors.top: parent.top
-                width: parent.width
-                height: parent.height / 3
 
-                ClockWidget {
-                    id: clockWidget1
-                    width: parent.width
-                    height: parent.height / 5
-                }
+                color: "transparent"
+                radius: 7
 
-                BatteryWidget {
-                    id: batteryWidget1
-                    width: parent.width
-                    height: parent.height / 5
-                    anchors.top: clockWidget1.bottom
+                ColumnLayout {
+                    id: topcol
+
+                    width: parent.parent.width
+                    height: parent.parent.height / 3
+                    spacing: theme.widgetsSpacing
+
+                    ClockWidget {
+                        Layout.topMargin: 5
+                    }
+
+                    BatteryWidget {}
+
+                    Item { // fill height so that widgets are pushed to the top
+                        Layout.fillHeight: true
+                    }
                 }
             }
 
-            Column {
-                id: midcol
-                anchors.top: topcol.bottom
-                width: parent.width
+            Rectangle {
+                id: mid
+
                 height: parent.height / 3
+                width: parent.width
+                anchors.top: top.bottom
+
+                color: "transparent"
+                radius: 7
 
                 HyprlandWorkspacesWidget {
-
+                    anchors.centerIn: parent
                 }
             }
 
-            Column {
-                id: bottomcol
-                anchors.top: midcol.bottom
-                anchors.bottom: parent.bottom
-                width: parent.width
+            Rectangle {
+                id: bottom
+
                 height: parent.height / 3
+                width: parent.width
+                anchors.top: mid.bottom
+                anchors.bottom: parent.bottom
 
+                color: "transparent"
+                radius: 7
 
-                Bluetooth {
-                    id: bluetoothWidget
-                    anchors.bottom: parent.bottom
+                Column {
+                    id: bottomcol
                     width: parent.width
+                    height: parent.height / 3
+                    anchors.bottom: parent.bottom
+                    spacing: theme.widgetsSpacing
+
+                    BluetoothWidget{
+                        anchors.bottom: parent.bottom
+                        anchors.bottomMargin: 5
+                    }
                 }
             }
-
-
         }
     }
 }
-
-/*
-PanelWindow {
-  anchors {
-    top: true
-    left: true
-    right: true
-  }
-
-  implicitHeight: 30
-
-  Text {
-      text: Time.time
-      verticalAlignment: Text.AlignVCenter
-  }
-}
-*/

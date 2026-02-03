@@ -2,13 +2,15 @@ import Quickshell
 import QtQuick
 
 Rectangle {
-    id: clockWidget
-    color: theme.backgroundColor
+    height: text.height
+    width: parent.width
+    color: "transparent"
 
     Text {
-        text: TimeData.time
+        id: text
+        text: TimeWidgetData.time
+        anchors.horizontalCenter: parent.horizontalCenter
         color: theme.foregroundColor
         font: theme.ubuntuMonoNerdFont
-        anchors.centerIn: parent
     }
 }

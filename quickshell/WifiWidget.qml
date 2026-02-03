@@ -1,6 +1,8 @@
 import Quickshell
 import QtQuick
 
+// waiting on next quickshell release
+
 Rectangle {
     id: wifiWidget
     height: 100

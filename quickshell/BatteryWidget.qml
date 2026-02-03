@@ -4,7 +4,9 @@ import QtQuick
 
 Rectangle {
     id: batteryWidget
-    color: theme.backgroundColor
+    color: "transparent"
+    height: col.height
+    width: parent.width
 
     function getPercentage() {
         if (UPower.displayDevice.isLaptopBattery) {
@@ -51,22 +53,26 @@ Rectangle {
 
     visible: UPower.displayDevice.isLaptopBattery
 
-    Text {
-        id: icon
-        text: batteryWidget.getIcon()
-        color: batteryWidget.getColor()
-        anchors.centerIn: parent
-        font: theme.ubuntuMonoNerdFont
+    Column {
+        id: col
+        width: parent.width
+
+        Text {
+            id: icon
+            text: batteryWidget.getIcon()
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: batteryWidget.getColor()
+            font: theme.ubuntuMonoNerdFont
+        }
+
+
+        Text {
+            text: batteryWidget.getPercentage() + "%"
+            anchors.horizontalCenter: parent.horizontalCenter
+            font: theme.ubuntuMonoNerdFont
+            color: theme.foregroundColor
+        }
     }
 
-    /*
-    Text {
-        height: 25
-        text: batteryWidget.getPercentage() + "%"
-        color: theme.foregroundColor
-        anchors.top: icon.bottom
-        anchors.leftMargin: 5
-        anchors.horizontalCenter: icon.horizontalCenter
-        font: theme.ubuntuMonoNerdFont
-    }*/
+
 }

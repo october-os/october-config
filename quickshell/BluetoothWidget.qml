@@ -4,7 +4,10 @@ import QtQuick
 
 Rectangle {
     id: bluetoothWidget
-    color: theme.backgroundColor
+    width: parent.width
+    height: bluetoothWidget.hasBluetoothAdapter() ? icon.height : 0
+    color: "transparent"
+
     function hasBluetoothAdapter() {
         return Bluetooth.defaultAdapter != null
     }
@@ -47,24 +50,11 @@ Rectangle {
 
     }
 
-    height: bluetoothWidget.hasBluetoothAdapter() ? 25 : 0
-
     Text {
         id: icon
         text: bluetoothWidget.getIcon()
-        anchors.centerIn: parent
+        anchors.horizontalCenter: parent.horizontalCenter
         font: theme.ubuntuMonoNerdFont
         color: theme.foregroundColor
     }
-
-    /*
-    Text {
-        height: 25
-        text: batteryWidget.getPercentage() + "%"
-        color: theme.foregroundColor
-        anchors.top: icon.bottom
-        anchors.leftMargin: 5
-        anchors.horizontalCenter: icon.horizontalCenter
-        font: theme.ubuntuMonoNerdFont
-    }*/
 }
