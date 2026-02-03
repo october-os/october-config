@@ -2,6 +2,8 @@ import Quickshell
 import Quickshell.Bluetooth
 import QtQuick
 
+import qs.theme
+
 Rectangle {
     id: bluetoothWidget
     width: parent.width
@@ -42,6 +44,10 @@ Rectangle {
             case disabling: return "󰂳"
             default: return ""
         }
+    }
+
+    Theme {
+        id: theme
     }
 
     Text {

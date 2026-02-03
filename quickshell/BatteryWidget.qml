@@ -2,11 +2,17 @@ import Quickshell
 import Quickshell.Services.UPower
 import QtQuick
 
+import qs.theme
+
 Rectangle {
     id: batteryWidget
     color: "transparent"
     height: col.height
     width: parent.width
+
+    Theme {
+        id: theme
+    }
 
     function getPercentage() {
         if (UPower.displayDevice.isLaptopBattery) {

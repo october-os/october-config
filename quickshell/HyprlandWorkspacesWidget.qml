@@ -3,6 +3,7 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 
+import qs.theme
 
 Rectangle {
     width: col.width
@@ -23,6 +24,10 @@ Rectangle {
                 color: "transparent"
                 visible: workspace.onThisScreen() && !workspace.isSpecialWorkspace()
                 required property var modelData
+
+                Theme {
+                    id: theme
+                }
 
                 function onThisScreen() {
                     return modelData.monitor.name == bar.screen.name
