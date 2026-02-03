@@ -11,20 +11,49 @@ Column {
         model: Hyprland.workspaces.values
 
         Rectangle {
+            id: workspace
             width: 30
-            height: 20
+            height: workspace.workspaceWrapperHeight()
             color: theme.backgroundColor
             required property var modelData
 
+            function onThisScreen() {
+                return modelData.monitor.name == helloo.screen.name
+            }
+
+            function isSpecialWorkspace() {
+                console.log(modelData.id < 0)
+                return modelData.id < 0
+            }
+
+            function workspaceWrapperHeight() {
+                if (!workspace.onThisScreen() || workspace.isSpecialWorkspace()) {
+                    return 0
+                } else {
+                    return 20
+                }
+            }
+
+            function workspaceButtonHeight() {
+                if (!workspace.onThisScreen() || workspace.isSpecialWorkspace()) {
+                    return 0
+                } else if (modelData.active) {
+                    return 20
+                } else {
+                    return 8
+                }
+            }
+
             Rectangle {
-                color: parent.modelData.active ? "#ff00ff" : theme.foregroundColor
+                color: parent.modelData.active ? theme.foregroundColor : theme.foregroundColor
                 radius: 10
-                height: parent.modelData.active ? 20 : 8
+                height: parent.workspaceButtonHeight()
+                visible: parent.onThisScreen()
                 Layout.alignment: Qt.AlignHCenter
                 width: parent.parent.width / 4
                 anchors.centerIn: parent
 
-                Behavior on width {
+                Behavior on height {
                     NumberAnimation { duration: 150; easing.type: Easing.InOutQuad }
                 }
             }

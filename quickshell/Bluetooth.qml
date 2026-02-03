@@ -4,6 +4,7 @@ import QtQuick
 
 Rectangle {
     id: bluetoothWidget
+    color: theme.backgroundColor
     function hasBluetoothAdapter() {
         return Bluetooth.defaultAdapter != null
     }
@@ -53,6 +54,7 @@ Rectangle {
         text: bluetoothWidget.getIcon()
         anchors.centerIn: parent
         font: theme.ubuntuMonoNerdFont
+        color: theme.foregroundColor
     }
 
     /*

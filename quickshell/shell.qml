@@ -7,19 +7,25 @@ Variants {
 
     delegate: Component {
         PanelWindow {
+            required property var modelData
             QtObject {
                 id: theme
                 readonly property font ubuntuMonoNerdFont: Qt.font({
                     family: "Ubuntu Mono Nerd Font Propo",
                     pointSize: 12
                 })
-                readonly property string backgroundColor: "#ffffff"
-                readonly property string foregroundColor: "#000000"
+                readonly property string backgroundColor: "#18181a"
+                readonly property string foregroundColor: "#ffffff"
+            }
+
+            QtObject {
+                id: helloo
+                readonly property ShellScreen screen: modelData
             }
 
             color: theme.backgroundColor
 
-            required property var modelData
+
 
             screen: modelData
 

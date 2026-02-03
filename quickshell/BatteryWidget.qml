@@ -8,7 +8,7 @@ Rectangle {
 
     function getPercentage() {
         if (UPower.displayDevice.isLaptopBattery) {
-            return (UPower.devices.values[0].percentage * 100).toFixed()
+            return (UPower.displayDevice.percentage * 100).toFixed()
         }
     }
 
