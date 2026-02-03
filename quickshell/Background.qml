@@ -9,6 +9,8 @@ Variants {
         PanelWindow {
             required property var modelData
 
+            screen: modelData
+
             WlrLayershell.layer: WlrLayer.Background
 
             anchors {
