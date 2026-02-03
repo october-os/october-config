@@ -22,7 +22,6 @@ Column {
             }
 
             function isSpecialWorkspace() {
-                console.log(modelData.id < 0)
                 return modelData.id < 0
             }
 
