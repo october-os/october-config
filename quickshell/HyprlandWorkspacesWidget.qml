@@ -21,6 +21,7 @@ Rectangle {
                 width: 30
                 height: workspace.workspaceWrapperHeight()
                 color: "transparent"
+                visible: workspace.onThisScreen() && !workspace.isSpecialWorkspace()
                 required property var modelData
 
                 function onThisScreen() {
@@ -32,17 +33,11 @@ Rectangle {
                 }
 
                 function workspaceWrapperHeight() {
-                    if (!workspace.onThisScreen() || workspace.isSpecialWorkspace()) {
-                        return 0
-                    } else {
-                        return 20
-                    }
+                    return 20
                 }
 
                 function workspaceButtonHeight() {
-                    if (!workspace.onThisScreen() || workspace.isSpecialWorkspace()) {
-                        return 0
-                    } else if (modelData.active) {
+                    if (modelData.active) {
                         return 20
                     } else {
                         return 8
@@ -53,7 +48,7 @@ Rectangle {
                     color: parent.modelData.active ? theme.activeWorkspace : theme.inactiveWorkspace
                     radius: 10
                     height: parent.workspaceButtonHeight()
-                    visible: parent.onThisScreen()
+                    visible: parent.onThisScreen() && !workspace.isSpecialWorkspace()
                     width: parent.parent.width / 4
                     anchors.centerIn: parent
 
