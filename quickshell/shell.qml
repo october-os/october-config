@@ -7,7 +7,6 @@ ShellRoot {
     Theme {
         id: theme
     }
-    Background{}
     BarCorners{}
     Bar {}
 }
