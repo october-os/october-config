@@ -3,7 +3,8 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 import "modules/bluetooth"
-import "theme"
+
+import qs.theme
 
 Variants {
     id: barRoot
