@@ -8,15 +8,11 @@ import qs.theme
 
 Variants {
     id: barRoot
-    signal toggleBluetoothPopup()
-    signal panelReady(var window)
 
     model: Quickshell.screens
 
     delegate: Component {
         PanelWindow {
-            Component.onCompleted: barRoot.panelReady(this)
-
             WlrLayershell.layer: WlrLayer.Top
 
             required property var modelData
@@ -107,8 +103,6 @@ Variants {
                     BluetoothWidget{
                         anchors.bottom: parent.bottom
                         anchors.bottomMargin: 5
-
-                        onTogglePopup: barRoot.toggleBluetoothPopup()
                     }
                 }
             }

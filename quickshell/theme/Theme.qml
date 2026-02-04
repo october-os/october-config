@@ -12,4 +12,5 @@ QtObject {
     readonly property int workspacesSpacing: 5
     readonly property color activeWorkspace: "#D37846"
     readonly property color inactiveWorkspace: "#c7c4c2"
+    readonly property color accentColor: "#A17348"
 }

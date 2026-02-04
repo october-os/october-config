@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Io
 import Quickshell.Bluetooth
 import QtQuick
 
@@ -10,8 +11,6 @@ Rectangle {
     height: 20
     visible: Bluetooth.defaultAdapter != undefined
     color: "transparent"
-
-    signal togglePopup()
 
     function hasConnectedDevices() {
         var model = Bluetooth.defaultAdapter
@@ -46,6 +45,16 @@ Rectangle {
         }
     }
 
+    function launchBlueman() {
+        bluemanProcess.running = true
+    }
+
+    Process {
+        id: bluemanProcess
+        command: ["blueman-manager"]
+        running: false
+    }
+
     Theme {
         id: theme
     }
@@ -60,6 +69,7 @@ Rectangle {
 
     MouseArea {
         anchors.fill: parent
-        onClicked: bluetoothWidget.togglePopup()
+        cursorShape: Qt.PointingHandCursor
+        onClicked: bluetoothWidget.launchBlueman()
     }
 }
