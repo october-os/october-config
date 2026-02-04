@@ -2,7 +2,11 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
+
 import "modules/bluetooth"
+import "modules/battery"
+import "modules/clock"
+import "modules/hyprland"
 
 import qs.theme
 
