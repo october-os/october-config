@@ -64,6 +64,7 @@ Rectangle {
 
                 MouseArea {
                     anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
                     onClicked: Hyprland.dispatch("workspace " + parent.modelData.id)
                 }
             }
