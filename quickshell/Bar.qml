@@ -21,10 +21,6 @@ Variants {
 
             required property var modelData
 
-            Theme {
-                id: theme
-            }
-
             QtObject {
                 id: bar
                 readonly property ShellScreen screen: modelData
