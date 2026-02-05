@@ -9,6 +9,7 @@ Rectangle {
     width: col.width
     height: col.height
     color: "transparent"
+    radius: 10
 
     ColumnLayout {
         id: col
@@ -19,7 +20,7 @@ Rectangle {
 
             Rectangle {
                 id: workspace
-                width: 30
+                width: 20
                 height: workspace.workspaceWrapperHeight()
                 color: "transparent"
                 visible: workspace.onThisScreen() && !workspace.isSpecialWorkspace()
@@ -38,7 +39,7 @@ Rectangle {
                 }
 
                 function workspaceWrapperHeight() {
-                    return 20
+                    return 35
                 }
 
                 function workspaceButtonHeight() {
@@ -54,7 +55,7 @@ Rectangle {
                     radius: 10
                     height: parent.workspaceButtonHeight()
                     visible: parent.onThisScreen() && !workspace.isSpecialWorkspace()
-                    width: parent.parent.width / 4
+                    width: parent.parent.width / 2.5
                     anchors.centerIn: parent
 
                     Behavior on height {
@@ -64,7 +65,6 @@ Rectangle {
 
                 MouseArea {
                     anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
                     onClicked: Hyprland.dispatch("workspace " + parent.modelData.id)
                 }
             }
