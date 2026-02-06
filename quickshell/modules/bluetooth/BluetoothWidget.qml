@@ -27,7 +27,7 @@ Rectangle {
     }
 
     readonly property string iconText: {
-        var disabled = 0
+        var disabled = 4
         var enabled = 1
         var enabling = 2
         var disabling = 3
