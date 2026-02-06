@@ -9,11 +9,10 @@ ShellRoot {
         target: Quickshell
         function onReloadCompleted() { Quickshell.inhibitReloadPopup() }
         function onReloadFailed() { Quickshell.inhibitReloadPopup() }
-    }
+        }
 
-    Theme {
-        id: theme
-    }
+    Theme { id: theme }
+
     BarCorners{}
     Bar {}
 }

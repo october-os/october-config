@@ -37,7 +37,7 @@ Variants {
                 left: true
             }
 
-            implicitWidth: 30
+            implicitWidth: 40
 
             Rectangle {
                 id: top
@@ -106,10 +106,10 @@ Variants {
                     }
 
                     SoundWidget {
+                        Layout.bottomMargin: 5
                     }
 
                     BluetoothWidget{
-                        id: bluetoothWidget
                         Layout.bottomMargin: 5
                     }
                 }

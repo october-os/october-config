@@ -6,8 +6,8 @@ import QtQuick.Layouts
 import qs.theme
 
 Rectangle {
-    width: col.width
-    height: col.height
+    implicitWidth: col.width
+    implicitHeight: col.height
     color: "transparent"
     radius: 10
 
@@ -21,45 +21,27 @@ Rectangle {
             Rectangle {
                 id: workspace
                 width: 20
-                height: workspace.workspaceWrapperHeight()
+                height: workspaceWrapperHeight
                 color: "transparent"
-                visible: workspace.onThisScreen() && !workspace.isSpecialWorkspace()
+                visible: onThisScreen && !isSpecialWorkspace
                 required property var modelData
 
-                Theme {
-                    id: theme
-                }
-
-                function onThisScreen() {
-                    return modelData.monitor.name == bar.screen.name
-                }
-
-                function isSpecialWorkspace() {
-                    return modelData.id < 0
-                }
-
-                function workspaceWrapperHeight() {
-                    return 35
-                }
-
-                function workspaceButtonHeight() {
-                    if (modelData.active) {
-                        return 20
-                    } else {
-                        return 8
-                    }
-                }
+                readonly property bool onThisScreen: modelData.monitor.name == bar.screen.name
+                readonly property bool isActive: modelData.active
+                readonly property bool isSpecialWorkspace: modelData.id < 0
+                readonly property int workspaceWrapperHeight: 35
+                readonly property int workspaceButtonHeight: modelData.active ? 20 : 8
 
                 Rectangle {
-                    color: parent.modelData.active ? theme.activeWorkspace : theme.inactiveWorkspace
+                    color: isActive ? theme.activeWorkspace : theme.inactiveWorkspace
                     radius: 10
-                    height: parent.workspaceButtonHeight()
-                    visible: parent.onThisScreen() && !workspace.isSpecialWorkspace()
+                    height: workspaceButtonHeight
+                    visible: onThisScreen && !isSpecialWorkspace
                     width: parent.parent.width / 2.5
                     anchors.centerIn: parent
 
                     Behavior on height {
-                        NumberAnimation { duration: 200; easing.type: Easing.InOutQuad }
+                        NumberAnimation { duration: theme.workspacesAnimationDelay; easing.type: Easing.InOutQuad }
                     }
                 }
 

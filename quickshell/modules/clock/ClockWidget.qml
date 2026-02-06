@@ -2,8 +2,8 @@ import Quickshell
 import QtQuick
 
 Rectangle {
-    height: text.height
-    width: parent.width
+    implicitHeight: text.height
+    implicitWidth: parent.width
     color: "transparent"
 
     Text {

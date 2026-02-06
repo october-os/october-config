@@ -1,53 +1,36 @@
 import Quickshell
+import Quickshell.Io
 import Quickshell.Services.Pipewire
 import QtQuick
 
 import qs.theme
 
 Rectangle {
-    id: batteryWidget
+    id: soundWidget
     color: "transparent"
-    height: col.height
+    implicitHeight: col.height
     width: parent.width
 
     PwObjectTracker { objects: [ Pipewire.defaultAudioSink ] }
 
-    Theme {
-        id: theme
+    readonly property bool hasDefaultAudioSink: Pipewire.defaultAudioSink != null
+    readonly property int volumePercentage: hasDefaultAudioSink ? Math.round(Pipewire.defaultAudioSink.audio.volume * 100) : 0
+    readonly property string iconText: {
+        if (!hasDefaultAudioSink) return ""
+        if (Pipewire.defaultAudioSink.audio.muted) return "󰝟"
+        if (volumePercentage >= 75) return "󰕾"
+        if (volumePercentage >= 25) return "󰖀"
+        return "󰕿"
     }
 
-    function getVolume() {
-        if (Pipewire.defaultAudioSink != null) {
-            return (Pipewire.defaultAudioSink.audio.volume * 100).toFixed()
-        }
-    }
-
-    function getIcon() {
-        var volume = batteryWidget.getVolume()
-        if (Pipewire.defaultAudioSink == null) {
-            return ""
-        }
-
-        if (Pipewire.defaultAudioSink.audio.muted) {
-            return "󰝟";
-        }
-
-        switch (true) {
-            case (volume >= 75): return "󰕾"
-            case (volume >= 25): return "󰖀"
-            default:             return "󰕿"
-        }
-    }
-
-    visible: Pipewire.defaultAudioSink != null
+    visible: hasDefaultAudioSink
 
     Column {
         id: col
         width: parent.width
 
         Text {
-            id: icon
-            text: batteryWidget.getIcon()
+            text: iconText
             anchors.horizontalCenter: parent.horizontalCenter
             font: theme.ubuntuMonoNerdFont
             color: theme.foregroundColor
@@ -55,12 +38,27 @@ Rectangle {
 
 
         Text {
-            text: batteryWidget.getVolume() + "%"
+            text: volumePercentage + "%"
             anchors.horizontalCenter: parent.horizontalCenter
             font: theme.ubuntuMonoNerdFont
             color: theme.foregroundColor
         }
     }
 
+    function launchPavuControl() {
+        bluemanProcess.running = true
+    }
+
+    Process {
+        id: bluemanProcess
+        command: ["pavucontrol"]
+        running: false
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
+        onClicked: soundWidget.launchPavuControl()
+    }
 
 }

@@ -1,84 +1,68 @@
 import Quickshell
 import Quickshell.Services.UPower
 import QtQuick
-
 import qs.theme
 
 Rectangle {
-    id: batteryWidget
     color: "transparent"
-    height: col.height
-    width: parent.width
+    implicitHeight: col.height
+    implicitWidth: parent.width
+    visible: isLaptop
 
-    Theme {
-        id: theme
-    }
-
-    function getPercentage() {
-        if (UPower.displayDevice.isLaptopBattery) {
-            return (UPower.displayDevice.percentage * 100).toFixed()
-        }
-    }
-
-    function getIcon() {
-        var percentage = batteryWidget.getPercentage()
-        if (!UPower.displayDevice.isLaptopBattery) {
-            return ""
-        }
-
-        if (!UPower.onBattery) {
-            return "󰂄"
-        }
-        switch (true) {
-            case (percentage == 100): return "󰁹"
-            case (percentage >= 90): return "󰂂"
-            case (percentage >= 80): return "󰂁"
-            case (percentage >= 70): return "󰂀"
-            case (percentage >= 60): return "󰁿"
-            case (percentage >= 50): return "󰁾"
-            case (percentage >= 40): return "󰁽"
-            case (percentage >= 30): return "󰁼"
-            case (percentage >= 20): return "󰁻"
-            case (percentage >= 10): return "󰁺"
-            default:                 return "󱃍"
-        }
-    }
-
-    function getColor() {
-        var percentage = batteryWidget.getPercentage()
-        if (!UPower.onBattery) {
-            return "#00ff00"
-        }
-
-        if (percentage <= 15) {
-            return "#ff0000"
+    readonly property bool isLaptop: UPower.displayDevice.isLaptopBattery
+    readonly property int batteryPercentage: isLaptop ? Math.round(UPower.displayDevice.percentage * 100) : 0
+    readonly property bool isCharging: !UPower.onBattery
+    readonly property string iconText: {
+        if (!isLaptop) return ""
+        if (isCharging) {
+            if (batteryPercentage >= 100) return "󰂅"
+            if (batteryPercentage >= 90)  return "󰂋"
+            if (batteryPercentage >= 80)  return "󰂊"
+            if (batteryPercentage >= 70)  return "󰢞"
+            if (batteryPercentage >= 60)  return "󰂉"
+            if (batteryPercentage >= 50)  return "󰢝"
+            if (batteryPercentage >= 40)  return "󰂈"
+            if (batteryPercentage >= 30)  return "󰂇"
+            if (batteryPercentage >= 20)  return "󰂆"
+            if (batteryPercentage >= 10)  return "󰢜"
+            return "󰢟"
         } else {
-            return theme.foregroundColor
+            if (batteryPercentage >= 100) return "󰂂"
+            if (batteryPercentage >= 90)  return "󰂂"
+            if (batteryPercentage >= 80)  return "󰂁"
+            if (batteryPercentage >= 70)  return "󰂀"
+            if (batteryPercentage >= 60)  return "󰁿"
+            if (batteryPercentage >= 50)  return "󰁾"
+            if (batteryPercentage >= 40)  return "󰁽"
+            if (batteryPercentage >= 30)  return "󰁼"
+            if (batteryPercentage >= 20)  return "󰁻"
+            if (batteryPercentage >= 10)  return "󰁺"
+            return "󱃍"
         }
     }
-
-    visible: UPower.displayDevice.isLaptopBattery
+    readonly property color iconColor: {
+        if (isCharging) return "#77ff77"
+        if (batteryPercentage <= 15) return "#ff7777"
+        return theme.foregroundColor
+    }
 
     Column {
         id: col
         width: parent.width
+        spacing: 2 // Optionnel: petit espace entre l'icône et le texte
 
         Text {
-            id: icon
-            text: batteryWidget.getIcon()
+            text: iconText
             anchors.horizontalCenter: parent.horizontalCenter
-            color: batteryWidget.getColor()
+            color: iconColor
             font: theme.ubuntuMonoNerdFont
         }
 
-
         Text {
-            text: batteryWidget.getPercentage() + "%"
+            text: batteryPercentage + "%"
             anchors.horizontalCenter: parent.horizontalCenter
             font: theme.ubuntuMonoNerdFont
             color: theme.foregroundColor
         }
     }
-
-
 }

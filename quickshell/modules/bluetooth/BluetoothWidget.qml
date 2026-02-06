@@ -7,12 +7,14 @@ import qs.theme
 
 Rectangle {
     id: bluetoothWidget
-    width: parent.width
-    height: 20
-    visible: Bluetooth.defaultAdapter != undefined
+    implicitWidth: parent.width
+    implicitHeight: icon.height
+    visible: hasBluetoothAdapter
     color: "transparent"
 
-    function hasConnectedDevices() {
+    readonly property bool hasBluetoothAdapter: Bluetooth.defaultAdapter != undefined
+
+    readonly property bool hasConnectedDevices: {
         var model = Bluetooth.defaultAdapter
 
         for (var i in model.devices.values) {
@@ -24,8 +26,8 @@ Rectangle {
         return false
     }
 
-    function getIcon() {
-        var disabled = 4
+    readonly property string iconText: {
+        var disabled = 0
         var enabled = 1
         var enabling = 2
         var disabling = 3
@@ -33,7 +35,7 @@ Rectangle {
         switch (Bluetooth.defaultAdapter.state) {
             case disabled: return "󰂲"
             case enabled: {
-                if (bluetoothWidget.hasConnectedDevices()) {
+                if (hasConnectedDevices) {
                     return "󰂱"
                 } else {
                     return "󰂯"
@@ -55,13 +57,9 @@ Rectangle {
         running: false
     }
 
-    Theme {
-        id: theme
-    }
-
     Text {
         id: icon
-        text: bluetoothWidget.getIcon()
+        text: iconText
         anchors.horizontalCenter: parent.horizontalCenter
         font: theme.ubuntuMonoNerdFont
         color: theme.foregroundColor
