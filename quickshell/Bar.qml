@@ -7,6 +7,7 @@ import "modules/bluetooth"
 import "modules/battery"
 import "modules/clock"
 import "modules/hyprland"
+import "modules/sound"
 
 import qs.theme
 
@@ -93,16 +94,23 @@ Variants {
                 color: "transparent"
                 radius: 7
 
-                Column {
+                ColumnLayout {
                     id: bottomcol
                     width: parent.width
                     height: parent.height / 3
                     anchors.bottom: parent.bottom
                     spacing: theme.widgetsSpacing
 
+                    Item { // fill height so that widgets are pushed to the top
+                        Layout.fillHeight: true
+                    }
+
+                    SoundWidget {
+                    }
+
                     BluetoothWidget{
-                        anchors.bottom: parent.bottom
-                        anchors.bottomMargin: 5
+                        id: bluetoothWidget
+                        Layout.bottomMargin: 5
                     }
                 }
             }
