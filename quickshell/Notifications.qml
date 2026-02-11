@@ -14,10 +14,21 @@ PanelWindow {
         right: true
     }
 
+    margins {
+        top: 20
+        right: 20
+    }
+
     color: "transparent"
 
     implicitHeight: 100
-    implicitWidth: 300
+    implicitWidth: 0
+
+    Behavior on implicitWidth {
+        SmoothedAnimation {
+            velocity: 600
+        }
+    }
 
     PopupWindow {
         id: notificationPopup
@@ -49,6 +60,7 @@ PanelWindow {
             onNotification: (n) => {
                 notificationPopup.lastNotification = n;
                 notificationPopup.visible = true;
+                parentWindow.implicitWidth = 300;
 
                 var t = 5000;
                 if (n.expireTimeout != -1) {
@@ -56,8 +68,12 @@ PanelWindow {
                 }
 
                 notificationPopup.delay(t, function() {
-                    notificationPopup.visible = false;
+                    parentWindow.implicitWidth = 0;
+
+                    notificationPopup.delay(400, function() {
+                        notificationPopup.visible = false;
                     });
+                });
             }
         }
 
@@ -69,6 +85,7 @@ PanelWindow {
             Column {
                 padding: 10
                 spacing: 5
+                width: parent.width
 
                 Text {
                     text: notificationPopup.getLastNotification().appName + "/" + notificationPopup.getLastNotification().summary
@@ -79,19 +96,26 @@ PanelWindow {
 
                 Row {
                     spacing: 5
-                    leftPadding: 10
                     height: 50
+                    width: parent.width
 
                     Image {
+                        id: image
                         source: notificationPopup.getLastNotification().image
                         height: parent.height
+                        width: parent.width / 6
                         fillMode: Image.PreserveAspectFit
+                        visible: notificationPopup.getLastNotification().image != ""
                     }
 
                     Text {
                         text: notificationPopup.getLastNotification().body
                         font: theme.ubuntuMonoNerdFont
                         color: theme.foregroundColor
+                        wrapMode: Text.Wrap
+                        elide: Text.ElideRight
+                        height: parent.height
+                        width: image.visible ? parent.width - (image.width + 10) : parent.width
                     }
                 }
             }
