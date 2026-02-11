@@ -26,6 +26,7 @@ PanelWindow {
         implicitWidth: parentWindow.width
         implicitHeight: parentWindow.height
         visible: false
+        color: "transparent"
 
         property var lastNotification: Notification
 
@@ -49,41 +50,50 @@ PanelWindow {
                 notificationPopup.lastNotification = n;
                 notificationPopup.visible = true;
 
-                var t = 2000;
+                var t = 5000;
                 if (n.expireTimeout != -1) {
                     t = n.expireTimeout * 1000
                 }
 
                 notificationPopup.delay(t, function() {
                     notificationPopup.visible = false;
-                })
+                    });
             }
         }
 
         Rectangle {
             anchors.fill: parent
             color: theme.backgroundColor
+            radius: 10
 
-            Text {
-                id: appNameText
-                text: notificationPopup.getLastNotification().appName
-                font: theme.ubuntuMonoNerdFont
-                color: theme.foregroundColor
-            }
+            Column {
+                padding: 10
+                spacing: 5
 
-            Text {
-                id: summaryText
-                text: notificationPopup.getLastNotification().summary
-                anchors.top: appNameText.bottom
-                font: theme.ubuntuMonoNerdFont
-                color: theme.foregroundColor
-            }
+                Text {
+                    text: notificationPopup.getLastNotification().appName + "/" + notificationPopup.getLastNotification().summary
+                    font: theme.ubuntuMonoNerdFont
+                    color: theme.foregroundColor
+                    opacity: 0.5
+                }
 
-            Text {
-                text: notificationPopup.getLastNotification().body
-                anchors.top: summaryText.bottom
-                font: theme.ubuntuMonoNerdFont
-                color: theme.foregroundColor
+                Row {
+                    spacing: 5
+                    leftPadding: 10
+                    height: 50
+
+                    Image {
+                        source: notificationPopup.getLastNotification().image
+                        height: parent.height
+                        fillMode: Image.PreserveAspectFit
+                    }
+
+                    Text {
+                        text: notificationPopup.getLastNotification().body
+                        font: theme.ubuntuMonoNerdFont
+                        color: theme.foregroundColor
+                    }
+                }
             }
         }
     }
