@@ -29,14 +29,34 @@ PanelWindow {
 
         property var lastNotification: Notification
 
+        Timer {
+            id: timer
+        }
+
+        function delay(t, cb) {
+            timer.interval = t;
+            timer.repeat = false;
+            timer.triggered.connect(cb);
+            timer.start();
+        }
+
         function getLastNotification() {
             return lastNotification
         }
 
         NotificationServer{
             onNotification: (n) => {
-                notificationPopup.lastNotification = n
-                notificationPopup.visible = true
+                notificationPopup.lastNotification = n;
+                notificationPopup.visible = true;
+
+                var t = 2000;
+                if (n.expireTimeout != -1) {
+                    t = n.expireTimeout * 1000
+                }
+
+                notificationPopup.delay(t, function() {
+                    notificationPopup.visible = false;
+                })
             }
         }
 
