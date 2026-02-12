@@ -25,8 +25,9 @@ PanelWindow {
     implicitWidth: 0
 
     Behavior on implicitWidth {
-        SmoothedAnimation {
-            velocity: 600
+        NumberAnimation {
+            duration: 400
+            easing.type: Easing.InOutQuad
         }
     }
 
@@ -42,10 +43,14 @@ PanelWindow {
         property var lastNotification: Notification
 
         Timer {
-            id: timer
+            id: notifTimer
         }
 
-        function delay(t, cb) {
+        Timer {
+            id: visibleTimer
+        }
+
+        function delay(t, timer, cb) {
             timer.interval = t;
             timer.repeat = false;
             timer.triggered.connect(cb);
@@ -67,10 +72,10 @@ PanelWindow {
                     t = n.expireTimeout * 1000
                 }
 
-                notificationPopup.delay(t, function() {
+                notificationPopup.delay(t, notifTimer, function() {
                     parentWindow.implicitWidth = 0;
 
-                    notificationPopup.delay(400, function() {
+                    notificationPopup.delay(400, visibleTimer, function() {
                         notificationPopup.visible = false;
                     });
                 });
