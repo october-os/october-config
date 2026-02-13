@@ -33,7 +33,10 @@ PanelWindow {
         visible: uiRect.opacity > 0
         color: "transparent"
 
-        property var lastNotification: Notification
+        property var lastNotifAppName: ""
+        property var lastNotifSummary: ""
+        property var lastNotifBody: ""
+        property var lastNotifImage: ""
 
         Timer {
             id: notifTimer
@@ -43,13 +46,12 @@ PanelWindow {
             }
         }
 
-        function getLastNotification() {
-            return lastNotification
-        }
-
         NotificationServer{
             onNotification: (n) => {
-                notificationPopup.lastNotification = n;
+                notificationPopup.lastNotifAppName = n.appName;
+                notificationPopup.lastNotifSummary = n.summary;
+                notificationPopup.lastNotifBody = n.body;
+                notificationPopup.lastNotifImage = n.image;
                 uiRect.shown = true;
 
                 notifTimer.interval = 5000;
@@ -83,7 +85,7 @@ PanelWindow {
                 width: parent.width
 
                 Text {
-                    text: notificationPopup.getLastNotification().appName + "/" + notificationPopup.getLastNotification().summary
+                    text: notificationPopup.lastNotifAppName + "/" + notificationPopup.lastNotifSummary
                     font: theme.ubuntuMonoNerdFont
                     color: theme.foregroundColor
                     opacity: 0.5
@@ -96,15 +98,15 @@ PanelWindow {
 
                     Image {
                         id: image
-                        source: notificationPopup.getLastNotification().image
+                        source: notificationPopup.lastNotifImage
                         height: parent.height
                         width: parent.width / 6
                         fillMode: Image.PreserveAspectFit
-                        visible: notificationPopup.getLastNotification().image != ""
+                        visible: notificationPopup.lastNotifImage != ""
                     }
 
                     Text {
-                        text: notificationPopup.getLastNotification().body
+                        text: notificationPopup.lastNotifBody
                         font: theme.ubuntuMonoNerdFont
                         color: theme.foregroundColor
                         wrapMode: Text.Wrap
