@@ -22,14 +22,7 @@ PanelWindow {
     color: "transparent"
 
     implicitHeight: 100
-    implicitWidth: 0
-
-    Behavior on implicitWidth {
-        NumberAnimation {
-            duration: 400
-            easing.type: Easing.InOutQuad
-        }
-    }
+    implicitWidth: 300
 
     PopupWindow {
         id: notificationPopup
@@ -37,24 +30,17 @@ PanelWindow {
         anchor.window: parentWindow
         implicitWidth: parentWindow.width
         implicitHeight: parentWindow.height
-        visible: false
+        visible: uiRect.opacity > 0
         color: "transparent"
 
         property var lastNotification: Notification
 
         Timer {
             id: notifTimer
-        }
-
-        Timer {
-            id: visibleTimer
-        }
-
-        function delay(t, timer, cb) {
-            timer.interval = t;
-            timer.repeat = false;
-            timer.triggered.connect(cb);
-            timer.start();
+            repeat: false
+            onTriggered: {
+                uiRect.shown = false
+            }
         }
 
         function getLastNotification() {
@@ -64,28 +50,32 @@ PanelWindow {
         NotificationServer{
             onNotification: (n) => {
                 notificationPopup.lastNotification = n;
-                notificationPopup.visible = true;
-                parentWindow.implicitWidth = 300;
+                uiRect.shown = true;
 
-                var t = 5000;
+                notifTimer.interval = 5000;
                 if (n.expireTimeout != -1) {
-                    t = n.expireTimeout * 1000
+                    notifTimer.interval = n.expireTimeout * 1000
                 }
 
-                notificationPopup.delay(t, notifTimer, function() {
-                    parentWindow.implicitWidth = 0;
-
-                    notificationPopup.delay(400, visibleTimer, function() {
-                        notificationPopup.visible = false;
-                    });
-                });
+                notifTimer.start();
             }
         }
 
         Rectangle {
+            id: uiRect
             anchors.fill: parent
             color: theme.backgroundColor
             radius: 10
+            visible: opacity > 0
+            opacity: shown ? 1 : 0
+
+            property bool shown: false
+
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: 200
+                }
+            }
 
             Column {
                 padding: 10
