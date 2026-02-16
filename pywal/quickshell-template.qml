@@ -1,11 +1,11 @@
 import QtQuick
 
-QtObject {
+QtObject {{
     id: theme
-    readonly property font ubuntuMonoNerdFont: Qt.font({
+    readonly property font ubuntuMonoNerdFont: Qt.font({{
         family: "Ubuntu Mono Nerd Font Propo",
         pointSize: 12
-    })
+    }})
     readonly property color backgroundColor: "#ee{background.strip}"
     readonly property color foregroundColor: "{foreground}"
     readonly property int widgetsSpacing: 10
@@ -14,4 +14,4 @@ QtObject {
     readonly property color inactiveWorkspace: "{foreground}"
     readonly property color accentColor: "{color1}"
     readonly property int workspacesAnimationDelay: 200
-}
+}}
