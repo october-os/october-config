@@ -15,6 +15,8 @@ Variants {
 
             mask: Region {}
 
+            screen: modelData
+
             anchors {
                 top: true
                 right: true
