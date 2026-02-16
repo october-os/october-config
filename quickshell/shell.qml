@@ -15,4 +15,5 @@ ShellRoot {
 
     BarCorners{}
     Bar {}
+    Osd {}
 }
