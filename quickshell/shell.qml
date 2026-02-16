@@ -16,5 +16,4 @@ ShellRoot {
     Notifications{}
     BarCorners{}
     Bar {}
-    Osd {}
 }
