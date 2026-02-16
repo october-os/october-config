@@ -1,0 +1,51 @@
+@import "colors.css";
+
+window#osd {
+    font-family: "Ubuntu Mono Nerd Font Propo";
+    border-radius: 999px;
+    border: none;
+    background: var(--background);
+
+    #container {
+        margin: 16px;
+    }
+
+    image,
+    label {
+        color: var(--foreground);
+    }
+
+    progressbar:disabled,
+    image:disabled {
+        opacity: 0.5;
+    }
+
+    progressbar,
+    segmentedprogress {
+        min-height: 6px;
+        border-radius: 999px;
+        background: transparent;
+        border: none;
+    }
+    trough,
+    segment {
+        min-height: inherit;
+        border-radius: inherit;
+        border: none;
+        background: var(--foreground);
+    }
+    progress,
+    segment.active {
+        min-height: inherit;
+        border-radius: inherit;
+        border: none;
+        background: var(--foreground);
+    }
+
+    segment {
+        margin-left: 8px;
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+}
