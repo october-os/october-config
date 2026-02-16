@@ -13,6 +13,7 @@ ShellRoot {
 
     Theme { id: theme }
 
+    Notifications{}
     BarCorners{}
     Bar {}
     Osd {}
