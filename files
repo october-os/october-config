@@ -1,0 +1,8 @@
+.config/october-config
+    -> /wallpapers
+    -> /profile_picture.png
+    -> /scripts?
+
+.config/october-scripts?
+scripts in /bin and called with octoberctl instead?
+octoberctl switchwallpaper
