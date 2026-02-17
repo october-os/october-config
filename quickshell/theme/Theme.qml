@@ -6,12 +6,12 @@ QtObject {
         family: "Ubuntu Mono Nerd Font Propo",
         pointSize: 12
     })
-    readonly property color backgroundColor: "#ee150911"
-    readonly property color foregroundColor: "#c4c1c3"
+    readonly property color backgroundColor: "#ee20160e"
+    readonly property color foregroundColor: "#c7c4c2"
     readonly property int widgetsSpacing: 10
     readonly property int workspacesSpacing: -10
-    readonly property color activeWorkspace: "#746685"
-    readonly property color inactiveWorkspace: "#c4c1c3"
-    readonly property color accentColor: "#97576E"
+    readonly property color activeWorkspace: "#D37846"
+    readonly property color inactiveWorkspace: "#c7c4c2"
+    readonly property color accentColor: "#A17348"
     readonly property int workspacesAnimationDelay: 200
 }
