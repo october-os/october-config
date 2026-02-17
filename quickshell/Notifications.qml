@@ -64,7 +64,11 @@ Variants {
 
                         notifTimer.interval = 5000;
                         if (n.expireTimeout != -1) {
-                            notifTimer.interval = n.expireTimeout * 1000
+                            if (n.expireTimeout >= 1000) {
+                                notifTimer.interval = n.expireTimeout
+                            } else {
+                                notifTimer.interval = n.expireTimeout * 1000
+                            }
                         }
 
                         notifTimer.start();
