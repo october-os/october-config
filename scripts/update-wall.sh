@@ -23,3 +23,4 @@ cp $HOME/.cache/wal/quickshell-template.qml $configDir/quickshell/theme/Theme.qm
 cp $HOME/.cache/wal/hyprland-template.conf $configDir/hypr/colors.conf
 cp $HOME/.cache/wal/colors-kitty.conf ~/.config/kitty
 cp $HOME/.cache/wal/colors.css $configDir/styles/colors.css
+cp $HOME/.cache/wal/colors.css $configDir/wofi/
