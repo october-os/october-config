@@ -15,6 +15,9 @@ touch hypr/user/hyprland.conf
 # Setup Quickshell theme directory
 mkdir quickshell/theme
 
+# Setup Tuigreet
+sed -i 's/command = "agreety --cmd $SHELL"/command = "tuigreet --cmd start-hyprland"/' /etc/greetd/config.toml
+
 # Symlink everything to the right place
 dotConfig="$HOME/.config"
 
