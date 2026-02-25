@@ -11,3 +11,18 @@ curl $defaultPfp -o profile_picture.jpg
 # Setup Hyprland user config
 mkdir hypr/user
 touch hypr/user/hyprland.conf
+
+# Setup Quickshell theme directory
+mkdir quickshell/theme
+
+# Symlink everything to the right place
+dotConfig="$HOME/.config"
+
+ln -sf $PWD/hypr $dotConfig/hypr
+ln -sf $PWD/kitty $dotConfig/kitty
+ln -sf $PWD/quickshell $dotConfig/quickshell
+ln -sf $PWD/swayosd $dotConfig/swayosd
+ln -sf $PWD/wofi $dotConfig/wofi
+
+# Copy templates to pywal templates
+cp pywal/* $dotConfig/wal/templates/
