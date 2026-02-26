@@ -5,10 +5,13 @@ configDir=$HOME/.config/october-config
 randomWallpaper=$(ls "$configDir/wallpapers" | shuf -n 1)
 
 mkdir -p /tmp/october-config
+if [ ! -f /tmp/october-config/lastwallpaper ]; then
+    echo october > /tmp/october-config/lastwallpaper
+fi
 touch "/tmp/october-config/lastwallpaper"
 
 if [ $(ls -1q $configDir/wallpapers | wc -l) != "1" ]; then
-    while [ "$randomWallpaper" = $(cat /tmp/october-config/lastwallpaper) ]
+    while [ "$randomWallpaper" == $(cat /tmp/october-config/lastwallpaper) ]
     do
         randomWallpaper=$(ls "$configDir/wallpapers" | shuf -n 1)
     done
