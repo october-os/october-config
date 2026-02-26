@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Setup wallpapers directory
+mkdir wallpapers
+
 # Pull wallpaper
 defaultWallpaperLink="https://raw.githubusercontent.com/october-os/october-assets/refs/heads/main/october-wallpapers/logo-text-bottom-small.png"
 curl $defaultWallpaperLink -o wallpapers/wallpaper.png
@@ -29,3 +32,6 @@ ln -sf $PWD/wofi $dotConfig/wofi
 
 # Copy templates to pywal templates
 cp pywal/* $dotConfig/wal/templates/
+
+# Setup styles directory
+mkdir styles
