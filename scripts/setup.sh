@@ -32,7 +32,7 @@ ln -sf $octoberConfigDir/swayosd $dotConfig/swayosd
 ln -sf $octoberConfigDir/wofi $dotConfig/wofi
 
 # Copy templates to pywal templates
-cp pywal/* $dotConfig/wal/templates/
+cp $octoberConfigDir/pywal/* $dotConfig/wal/templates/
 
 # Setup styles directory
 mkdir $octoberConfigDir/styles
