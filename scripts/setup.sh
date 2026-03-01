@@ -1,37 +1,38 @@
 #!/bin/bash
 
+dotConfig="$HOME/.config"
+octoberConfigDir="$dotConfig/october-config"
+
 # Setup wallpapers directory
-mkdir wallpapers
+mkdir $octoberConfigDir/wallpapers
 
 # Pull wallpaper
 defaultWallpaperLink="https://raw.githubusercontent.com/october-os/october-assets/refs/heads/main/october-wallpapers/logo-text-bottom-small.png"
-curl $defaultWallpaperLink -o wallpapers/wallpaper.png
+curl $defaultWallpaperLink -o $octoberConfigDir/wallpapers/wallpaper.png
 
 # Pull default profile picture
 defaultPfp="https://raw.githubusercontent.com/october-os/october-assets/refs/heads/main/october-logo-background.png"
-curl $defaultPfp -o profile_picture.jpg
+curl $defaultPfp -o $octoberConfigDir/profile_picture.jpg
 
 # Setup Hyprland user config
-mkdir hypr/user
-touch hypr/user/hyprland.conf
+mkdir $octoberConfigDir/hypr/user
+touch $octoberConfigDir/hypr/user/hyprland.conf
 
 # Setup Quickshell theme directory
-mkdir quickshell/theme
+mkdir $octoberConfigDir/quickshell/theme
 
 # Setup Tuigreet
 sed -i 's/command = "agreety --cmd $SHELL"/command = "tuigreet --cmd start-hyprland"/' /etc/greetd/config.toml
 
 # Symlink everything to the right place
-dotConfig="$HOME/.config"
-
-ln -sf $PWD/hypr $dotConfig/hypr
-ln -sf $PWD/kitty $dotConfig/kitty
-ln -sf $PWD/quickshell $dotConfig/quickshell
-ln -sf $PWD/swayosd $dotConfig/swayosd
-ln -sf $PWD/wofi $dotConfig/wofi
+ln -sf $octoberConfigDir/hypr $dotConfig/hypr
+ln -sf $octoberConfigDir/kitty $dotConfig/kitty
+ln -sf $octoberConfigDir/quickshell $dotConfig/quickshell
+ln -sf $octoberConfigDir/swayosd $dotConfig/swayosd
+ln -sf $octoberConfigDir/wofi $dotConfig/wofi
 
 # Copy templates to pywal templates
 cp pywal/* $dotConfig/wal/templates/
 
 # Setup styles directory
-mkdir styles
+mkdir $octoberConfigDir/styles
