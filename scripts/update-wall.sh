@@ -21,13 +21,7 @@ echo -n "$randomWallpaper" > /tmp/october-config/lastwallpaper
 
 swww img --transition-type wave --transition-fps 120 --transition-duration 1.5 $configDir/wallpapers/$randomWallpaper
 
-wal -n -q -i "$configDir/wallpapers/$randomWallpaper" --backend colorthief
-cp $HOME/.cache/wal/quickshell-template.qml $configDir/quickshell/theme/Theme.qml
-cp $HOME/.cache/wal/hypr-template.conf $configDir/hypr/base/colors.conf
-cp $HOME/.cache/wal/colors-kitty.conf ~/.config/kitty
-cp $HOME/.cache/wal/colors.css $configDir/swayosd/colors.css
-cp $HOME/.cache/wal/colors.css $configDir/styles/colors.css
-cp $HOME/.cache/wal/gtk-template.css $configDir/styles/gtk.css
+($configDir/scripts/gen-color.sh $randomWallpaper)
 
 pkill swayosd-server
 nohup swayosd-server >/dev/null 2>&1 &
