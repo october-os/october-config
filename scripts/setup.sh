@@ -21,9 +21,6 @@ touch $octoberConfigDir/hypr/user/hyprland.conf
 # Setup Quickshell theme directory
 mkdir $octoberConfigDir/quickshell/theme
 
-# Setup Tuigreet
-sed -i 's/command = "agreety --cmd $SHELL"/command = "tuigreet --cmd start-hyprland"/' /etc/greetd/config.toml
-
 # Symlink everything to the right place
 ln -sf $octoberConfigDir/hypr $dotConfig/hypr
 ln -sf $octoberConfigDir/kitty $dotConfig/kitty
