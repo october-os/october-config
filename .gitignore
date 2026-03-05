@@ -1,8 +1,13 @@
 swayosd/colors.css
 hypr/base/colors.conf
-hypr/user/
-wallpapers/
+hypr/user/*
+wallpapers/*
 profile_picture.jpg
-styles/
-quickshell/theme/
+styles/*
+quickshell/theme/*
 kitty/colors-kitty.conf
+
+!wallpapers/.gitkeep
+!hypr/user/.gitkeep
+!styles/.gitkeep
+!quickshell/theme/.gitkeep
