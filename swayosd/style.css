@@ -4,48 +4,40 @@ window#osd {
     font-family: "Ubuntu Mono Nerd Font Propo";
     border-radius: 999px;
     border: none;
-    background: var(--background);
+    background: alpha(var(--background), 0.93);
+}
+window#osd #container {
+    margin: 16px;
+    background: transparent;
+}
 
-    #container {
-        margin: 16px;
-    }
+window#osd image,
+window#osd label {
+    color: var(--foreground);
+}
 
-    image,
-    label {
-        color: var(--foreground);
-    }
+window#osd progressbar:disabled,
+window#osd image:disabled {
+    opacity: 0.5;
+}
 
-    progressbar:disabled,
-    image:disabled {
-        opacity: 0.5;
-    }
+window#osd progressbar {
+    min-height: 6px;
+    border-radius: 999px;
+    background: transparent;
+    border: none;
+}
 
-    progressbar,
-    segmentedprogress {
-        min-height: 6px;
-        border-radius: 999px;
-        background: transparent;
-        border: none;
-    }
-    trough,
-    segment {
-        min-height: inherit;
-        border-radius: inherit;
-        border: none;
-        background: var(--foreground);
-    }
-    progress,
-    segment.active {
-        min-height: inherit;
-        border-radius: inherit;
-        border: none;
-        background: var(--foreground);
-    }
+window#osd progress {
+    min-height: 6px;
+    border-radius: 999px;
+    background: var(--foreground);
+    border: none;
+}
 
-    segment {
-        margin-left: 8px;
-        &:first-child {
-            margin-left: 0;
-        }
-    }
+window#osd trough {
+    min-height: inherit;
+    border-radius: inherit;
+    border: none;
+    background: transparent;
 }
