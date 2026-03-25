@@ -19,7 +19,7 @@ fi
 
 echo -n "$randomWallpaper" > /tmp/october-config/lastwallpaper
 
-swww img --transition-type wave --transition-fps 120 --transition-duration 1.5 $configDir/wallpapers/$randomWallpaper
+awww img --transition-type wave --transition-fps 120 --transition-duration 1.5 $configDir/wallpapers/$randomWallpaper
 
 ($configDir/scripts/gen-color.sh $randomWallpaper)
 
