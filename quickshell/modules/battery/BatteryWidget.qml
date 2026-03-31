@@ -27,7 +27,7 @@ Rectangle {
             if (batteryPercentage >= 10)  return "󰢜"
             return "󰢟"
         } else {
-            if (batteryPercentage >= 100) return "󰂂"
+            if (batteryPercentage >= 100) return "󰁹"
             if (batteryPercentage >= 90)  return "󰂂"
             if (batteryPercentage >= 80)  return "󰂁"
             if (batteryPercentage >= 70)  return "󰂀"
