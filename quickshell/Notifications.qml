@@ -91,6 +91,11 @@ Variants {
                         }
                     }
 
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: notifTimer.triggered()
+                    }
+
                     Column {
                         padding: 10
                         spacing: 5
