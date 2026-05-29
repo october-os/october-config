@@ -8,6 +8,7 @@ import "modules/battery"
 import "modules/clock"
 import "modules/hyprland"
 import "modules/sound"
+import "modules/network"
 
 import qs.theme
 
@@ -109,7 +110,11 @@ Variants {
                         Layout.bottomMargin: 5
                     }
 
-                    BluetoothWidget{
+                    NetworkWidget {
+                        Layout.bottomMargin: 5
+                    }
+
+                    BluetoothWidget {
                         Layout.bottomMargin: 5
                     }
                 }
