@@ -11,7 +11,7 @@ curl $defaultWallpaperLink -o $octoberConfigDir/wallpapers/wallpaper.png
 defaultPfp="https://raw.githubusercontent.com/october-os/october-assets/refs/heads/main/october-logo-background.png"
 curl $defaultPfp -o $octoberConfigDir/profile_picture.jpg
 
-touch $octoberConfigDir/hypr/user/hyprland.conf
+touch $octoberConfigDir/hypr/user/hyprland.lua
 
 # Symlink everything to the right place
 ln -sf $octoberConfigDir/hypr $dotConfig/hypr
