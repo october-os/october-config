@@ -5,7 +5,7 @@
 local browser = "zen-browser"
 local terminal = "kitty"
 local main_mod = "SUPER"
-local app_launcher = "wofi -S drun"
+local app_launcher = "cd" .. os.getenv("HOME") .. "/.config/october-config/styles && wofi -S drun"
 local wallpaper_script = os.getenv("HOME") .. "/.config/october-config/scripts/update-wall.sh"
 
 require("./colors.lua")
