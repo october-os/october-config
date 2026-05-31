@@ -13,11 +13,27 @@ Rectangle {
         return Networking.connectivity != 1 ? "󰇧" : "󱐅";
     }
 
+    function launchNmTui() {
+        nmtuiProcess.running = true
+    }
+
+    Process {
+        id: nmtuiProcess
+        command: ["kitty -e nmtui"]
+        running: false
+    }
+
     Text {
         id: icon
         text: iconText
         anchors.horizontalCenter: parent.horizontalCenter
         font: theme.ubuntuMonoNerdFont
         color: theme.foregroundColor
+    }
+    
+    MouseArea {
+        anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
+        onClicked: networkWidget.launchNmTui()
     }
 }
