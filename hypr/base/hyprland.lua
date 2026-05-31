@@ -5,7 +5,7 @@
 browser = "zen-browser"
 terminal = "kitty"
 main_mod = "SUPER"
-app_launcher = "cd" .. os.getenv("HOME") .. "/.config/october-config/styles && wofi -S drun"
+app_launcher = "cd " .. os.getenv("HOME") .. "/.config/october-config/styles && wofi -S drun"
 wallpaper_script = os.getenv("HOME") .. "/.config/october-config/scripts/update-wall.sh"
 
 require("base/colors")
