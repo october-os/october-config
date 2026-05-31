@@ -8,8 +8,8 @@ hl.config({
         gaps_out = 5,
         border_size = 1,
         col = {
-            active_border   = { colors = {"rgba(".. color6 ..")", "rgba(" .. color4 .. ")"}, angle = 45 },
-            inactive_border = "rgba(" .. color8 .. ")",
+            active_border   = { colors = {"rgb(".. color6 ..")", "rgb(" .. color4 .. ")"}, angle = 45 },
+            inactive_border = "rgba(" .. color0 .. "88)",
         },
         layout = "dwindle",
     },
@@ -23,7 +23,7 @@ hl.config({
             enabled      = true,
             range        = 7,
             render_power = 2,
-            color        = "rgba(" .. color5 .. ")",
+            color        = "rgba(" .. color0 .. "55)",
         },
 
         blur = {

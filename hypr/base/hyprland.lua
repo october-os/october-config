@@ -2,14 +2,14 @@
 -- Variables
 --
 
-local browser = "zen-browser"
-local terminal = "kitty"
-local main_mod = "SUPER"
-local app_launcher = "cd" .. os.getenv("HOME") .. "/.config/october-config/styles && wofi -S drun"
-local wallpaper_script = os.getenv("HOME") .. "/.config/october-config/scripts/update-wall.sh"
+browser = "zen-browser"
+terminal = "kitty"
+main_mod = "SUPER"
+app_launcher = "cd" .. os.getenv("HOME") .. "/.config/october-config/styles && wofi -S drun"
+wallpaper_script = os.getenv("HOME") .. "/.config/october-config/scripts/update-wall.sh"
 
-require("./colors.lua")
-require("./monitors.lua")
+require("base/colors")
+require("base/monitors")
 
 --
 -- Environment variables
@@ -48,10 +48,9 @@ hl.window_rule({
         fullscreen = false,
         pin        = false,
     },
-
     no_focus = true,
 })
 
-require("./bindings.lua")
-require("./looks.lua")
-require("./input.lua")
+require("base/bindings")
+require("base/looks")
+require("base/input")
