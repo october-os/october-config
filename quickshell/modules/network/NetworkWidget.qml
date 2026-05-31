@@ -1,6 +1,8 @@
+import Quickshell
 import Quickshell.Networking
-
+import Quickshell.Io
 import QtQuick
+
 import qs.theme
 
 Rectangle {
@@ -19,7 +21,7 @@ Rectangle {
 
     Process {
         id: nmtuiProcess
-        command: ["kitty -e nmtui"]
+        command: ["kitty", "nmtui"]
         running: false
     }
 
