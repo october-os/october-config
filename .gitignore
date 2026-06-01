@@ -1,5 +1,6 @@
 swayosd/colors.css
 hypr/base/colors.conf
+hypr/base/colors.lua
 hypr/user/*
 wallpapers/*
 profile_picture.jpg
