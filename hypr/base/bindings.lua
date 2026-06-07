@@ -6,7 +6,7 @@ local hyprlock_config = os.getenv("HOME") .. "/.config/hypr/base/hyprlock.conf"
 
 -- Hyprland management
 hl.bind(main_mod .. " + M", hl.dsp.exec_cmd("awww kill && hyprctl dispatch 'hl.dsp.exit()'"))
-hl.bind(main_mod .. " + SHIFT + L", hl.dsp.exec_cmd("hyprlock -c" .. hyprlock_config))
+hl.bind(main_mod .. " + SHIFT + L", hl.dsp.exec_cmd("hyprlock -c " .. hyprlock_config))
 
 -- October management
 hl.bind(main_mod .. " + W", hl.dsp.exec_cmd(wallpaper_script))
