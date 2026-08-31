@@ -3,7 +3,7 @@
 randomWallpaper=$1
 configDir=$HOME/.config/october-config
 
-wal -n -q -i "$configDir/wallpapers/$randomWallpaper" --backend colorthief
+wal -n -q -i "$configDir/wallpapers/$randomWallpaper"
 cp $HOME/.cache/wal/quickshell-template.qml $configDir/quickshell/theme/Theme.qml
 cp $HOME/.cache/wal/hypr-template.lua $configDir/hypr/base/colors.lua
 cp $HOME/.cache/wal/hypr-template.conf $configDir/hypr/base/colors.conf
